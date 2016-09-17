@@ -1,0 +1,12 @@
+{
+  "name": "Salute",
+  "description": "This extension shows a salute for \"quality\" sites, images, articles, and more",
+  "version": "1.2",
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "browser_action": {
+    "default_title": "Don't like this site? Flip 'em off!"
+  },
+  "manifest_version": 2
+}
