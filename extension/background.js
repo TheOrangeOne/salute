@@ -2,17 +2,31 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-var min = 1;
-var max = 2;
-var current = min;
+var flippedOff = true;
 
 function updateIcon() {
-  chrome.browserAction.setIcon({path:"icon" + current + ".png"});
-  current++;
-
-  if (current > max)
-    current = min;
+  chrome.browserAction.setIcon({path:"icon" + (flippedOff ? 1 : 2) + ".png"});
+  flippedOff = !flippedOff;
 }
 
+function flipOff() {
+  if (!flippedOff) {
+    chrome.tabs.query({
+      'active': true, 
+      'lastFocusedWindow': true, 
+      'currentWindow': true
+    }, function(tabs) {
+      var url = tabs[0].url;
+      console.log(url);
+
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", "http://localhost:7022/api/flip", true);
+      xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+      xhr.send(JSON.stringify({ url: url }));
+    })
+  }
+}
+
+chrome.browserAction.onClicked.addListener(flipOff);
 chrome.browserAction.onClicked.addListener(updateIcon);
 updateIcon();
