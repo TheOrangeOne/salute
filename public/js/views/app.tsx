@@ -28,7 +28,6 @@ export default class App extends React.Component<any, AppState> {
     fetch('/api/user', { credentials: 'include' })
     .then((resp) => resp.json())
     .then((j) => {
-      console.log(j)
       this.setState(j)
     })
     .catch((err) => {console.log(err)})
@@ -38,7 +37,6 @@ export default class App extends React.Component<any, AppState> {
     fetch('/api/sites')
     .then((resp) => resp.json())
     .then((j) => {
-      console.log(j)
       this.setState({ user: DefaultUser, sites: j })
     })
     .catch((err) => { console.log(err) })

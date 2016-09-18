@@ -132,7 +132,6 @@ app.post('/api/flip', (req, res) => {
 app.get('/api/sites', (req, res) => {
   db.collection('sites', (err, collection) => {
     collection.find().toArray((err, items) => {
-      console.log(items);
       res.json(items);
     });
   });
