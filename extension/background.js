@@ -17,7 +17,6 @@ function flipOff() {
       'currentWindow': true
     }, function(tabs) {
       var url = tabs[0].url;
-      console.log(url);
 
       var xhr = new XMLHttpRequest();
       xhr.open("POST", "http://localhost:7022/api/flip", true);
@@ -27,6 +26,13 @@ function flipOff() {
   }
 }
 
+function reset() {
+  if (flippedOff) {
+    updateIcon();
+  }
+}
+
 chrome.browserAction.onClicked.addListener(flipOff);
 chrome.browserAction.onClicked.addListener(updateIcon);
+chrome.tabs.onActivated.addListener(reset);
 updateIcon();

@@ -128,30 +128,16 @@ app.post('/api/flip', (req, res) => {
   })
 })
 
-app.get('/test', (req, res) => {
-  request({
-    url: 'http://localhost:7022/api/getflips',
-    method: 'GET',
-    qs: {
-      url: 'test.com/article'
-    }
-  }, function(error, response, body) {
-    body = JSON.parse(body)
-    res.send('<h1> test.com/article: ' + body.flips + '  </h1>')
-  })
-})
 
-app.get('/test2', (req, res) => {
-  request({
-    uri: 'http://localhost:7022/api/flip',
-    method: 'POST',
-    json: {
-      url: 'test.com/article'
-    }
-  }, function(error, response, body) {
-    res.send('<h1> test.com/article: ' + body.flips + '  </h1>')
-  })
-})
+app.get('/api/sites', (req, res) => {
+  db.collection('sites', (err, collection) => {
+    collection.find().toArray((err, items) => {
+      console.log(items);
+      res.json(items);
+    });
+  });
+});
+
 
 // redirect everything else to index so react-router can manage
 // routing

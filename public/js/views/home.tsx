@@ -3,10 +3,12 @@ import { User } from "../models/user"
 
 interface Props {
   user: User;
+  sites: any;
 }
 
 interface State {
   user: User;
+  sites: any;
 }
 
 export default class HomePageView extends React.Component<Props, State> {
@@ -15,11 +17,12 @@ export default class HomePageView extends React.Component<Props, State> {
   }
 
   render() {
-    const { user } = this.props
+    const { user, sites } = this.props
 
     return (
       <article className="full four-fifth-1000">
         <h2> new </h2>
+        {sites.map((x: any, i: Number) => <h4 key={i}>{x.url}: {x.flips}</h4>)}
       </article>
     );
   }

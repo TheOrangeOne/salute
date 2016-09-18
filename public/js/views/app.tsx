@@ -7,18 +7,21 @@ import SideBarView from "./sidebar"
 
 export interface AppState {
   user: User;
+  sites: any;
 }
 
 export default class App extends React.Component<any, AppState> {
   constructor(props : any) {
     super(props)
     this.state = {
-      user: DefaultUser
+      user: DefaultUser,
+      sites: []
     }
   }
 
   componentDidMount() {
-    this.getUser();
+    //this.getUser();
+    this.getSites();
   }
 
   getUser() {
@@ -29,6 +32,16 @@ export default class App extends React.Component<any, AppState> {
       this.setState(j)
     })
     .catch((err) => {console.log(err)})
+  }
+
+  getSites() {
+    fetch('/api/sites')
+    .then((resp) => resp.json())
+    .then((j) => {
+      console.log(j)
+      this.setState({ user: DefaultUser, sites: j })
+    })
+    .catch((err) => { console.log(err) })
   }
 
   render() {
@@ -42,6 +55,7 @@ export default class App extends React.Component<any, AppState> {
             <SideBarView/>
             {this.props.children && React.cloneElement(this.props.children, {
                 user: this.state.user,
+                sites: this.state.sites
               })}
           </section>
         </main>
