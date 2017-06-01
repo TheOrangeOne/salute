@@ -3,6 +3,7 @@
 // found in the LICENSE file.
 
 var flippedOff = true;
+var xhr = new XMLHttpRequest();
 
 function updateIcon() {
   chrome.browserAction.setIcon({path:"icon" + (flippedOff ? 1 : 2) + ".png"});
@@ -17,8 +18,6 @@ function flipOff() {
       'currentWindow': true
     }, function(tabs) {
       var url = tabs[0].url;
-
-      var xhr = new XMLHttpRequest();
       xhr.open("POST", "http://localhost:7022/api/flip", true);
       xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
       xhr.send(JSON.stringify({ url: url }));
