@@ -13,6 +13,10 @@ export default class SideBarView extends React.Component<any, any> {
     
     return (
       <aside className="full fifth-1000">
+        <Link className={itemClass} to="/">
+          <FontIcon class="fa-home"/>
+          home
+        </Link>
         <Link className={itemClass} to="/new">
           <FontIcon class="fa-angle-double-up"/>
           new

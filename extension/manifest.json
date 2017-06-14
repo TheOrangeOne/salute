@@ -5,7 +5,7 @@
   "background": {
     "scripts": ["background.js"]
   },
-  "permissions": [ "tabs", "http://localhost/", "http://verhoog.ca/" ],
+  "permissions": [ "tabs", "http://localhost/", "http://salute.verhoog.ca/" ],
   "browser_action": {
     "default_title": "Don't like this site? Flip 'em off!"
   },
